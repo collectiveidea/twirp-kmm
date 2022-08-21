@@ -6,9 +6,9 @@ package com.collectiveidea.twirp
 import kotlin.test.Test
 import kotlin.test.assertTrue
 
-class LibraryTest {
+class GeneratorTest {
     @Test fun someLibraryMethodReturnsTrue() {
-        val classUnderTest = Library()
-        assertTrue(classUnderTest.someLibraryMethod(), "someLibraryMethod should return 'true'")
+        val classUnderTest = Generator()
+        assertTrue(true) // TODO: Flesh out
     }
 }
