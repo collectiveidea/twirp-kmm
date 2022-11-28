@@ -9,12 +9,12 @@ Download the latest release, currently `0.1.0-SNAPSHOT`, and pass it to `protoc`
 ```bash
 # Download the library to ~
 cd ~/
-curl -O https://repo1.maven.org/maven2/com/collectiveida/twirp/pbandk-gen-kotlin-ktor-twirp-service/0.1.0-SNAPSHOT/pbandk-gen-kotlin-ktor-twirp-service-0.1.0-SNAPSHOT.jar
+curl -O https://repo1.maven.org/maven2/com/collectiveidea/twirp/twirp-kmm-generator/0.1.0-SNAPSHOT/twirp-kmm-generator-0.1.0-SNAPSHOT.jar
 ```
 
 ```bash
 cd ~/exampleProject
-protoc --pbandk_out=kotlin_service_gen='~/pbandk-gen-kotlin-ktor-twirp-service-0.1.0-SNAPSHOT.jar|com.collectiveidea.twirp.Generator',kotlin_package=com.example.api:src/main/kotlin src/main/proto/example.proto
+protoc --pbandk_out=kotlin_service_gen='~/twirp-kmm-generator-0.1.0-SNAPSHOT.jar|com.collectiveidea.twirp.Generator',kotlin_package=com.example.api:src/main/kotlin src/main/proto/example.proto
 ```
 
 # Build
@@ -25,11 +25,11 @@ To build the library locally, run:
 ./gradlew build
 ```
 
-This creates the versioned `.jar` file, e.g. `lib/build/libs/lib-0.1.0-SNAPSHOT.jar`
+This creates the versioned `.jar` file, e.g. `generator/build/libs/twirp-kmm-generator-0.1.0-SNAPSHOT.jar`
 
 Then, the built version can be used, instead of the latest release, by supplying the path to the built `.jar`, e.g.:
 
 ```bash
-protoc --pbandk_out=kotlin_service_gen='/Users/darron/Development/pbandk-gen-kotlin-ktor-twirp-service/lib/build/libs/lib-0.1.0-SNAPSHOT.jar|com.collectiveidea.twirp.Generator',kotlin_package=com.example.api:shared/src/commonMain/kotlin shared/src/commonMain/proto/example.proto
+protoc --pbandk_out=kotlin_service_gen='/Users/darron/Development/twirp-kmm/generator/build/libs/twirp-kmm-generator-0.1.0-SNAPSHOT.jar|com.collectiveidea.twirp.Generator',kotlin_package=com.example.api:shared/src/commonMain/kotlin shared/src/commonMain/proto/example.proto
 ```
 
