@@ -2,7 +2,11 @@ plugins {
     kotlin("multiplatform")
     id("com.android.library")
     kotlin("plugin.serialization")
+    `maven-publish`
+    signing
 }
+
+description = "Runtime for Twirp service generator PBandK plugin for use in Kotlin Multiplatform Mobile projects."
 
 kotlin {
     android {
@@ -66,4 +70,16 @@ android {
         targetSdk = 33
     }
     namespace = "com.collectiveidea"
+}
+
+val javadocJar by tasks.registering(Jar::class) {
+    archiveClassifier.set("javadoc")
+}
+
+publishing {
+    publications.withType<MavenPublication> {
+        artifact(javadocJar.get())
+
+        configureTwirpKmmPOM(project.description!!)
+    }
 }

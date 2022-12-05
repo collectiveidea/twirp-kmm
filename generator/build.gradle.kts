@@ -1,10 +1,14 @@
 plugins {
     id("org.jetbrains.kotlin.jvm")
+    `maven-publish`
+    signing
 }
 
 repositories {
     mavenCentral()
 }
+
+description = "Twirp service generator PBandK plugin for use in Kotlin Multiplatform Mobile projects."
 
 dependencies {
     compileOnly("pro.streem.pbandk:pbandk-runtime:0.14.1")
@@ -26,5 +30,17 @@ tasks.jar {
                 "Implementation-Version" to project.version
             )
         )
+    }
+}
+
+val javadocJar by tasks.registering(Jar::class) {
+    archiveClassifier.set("javadoc")
+}
+
+publishing {
+    publications.withType<MavenPublication> {
+        artifact(javadocJar.get())
+
+        configureTwirpKmmPOM(project.description!!)
     }
 }
