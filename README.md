@@ -15,7 +15,7 @@ Download the latest release, currently `0.1.0`, and pass it to `protoc` via `pba
 ```bash
 # Download the library to ~
 cd ~/
-curl -O https://github.com/collectiveidea/twirp-kmm/releases/download/0.1.0/twirp-kmm-generator-0.1.0.jar
+curl -OL https://github.com/collectiveidea/twirp-kmm/releases/download/0.1.0/twirp-kmm-generator-0.1.0.jar
 ```
 
 
