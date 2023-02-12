@@ -22,12 +22,13 @@ class Generator : ServiceGenerator {
 
             interfaceMethods += """
                 @Throws(ServiceException::class, CancellationException::class)
-                suspend fun ${kotlinServiceMethodName}(request: $reqType): $respType
+                suspend fun ${kotlinServiceMethodName}(request: $reqType, requestHeaders: Map<String, String>? = null): $respType
              """.trimIndent()
 
             implementationMethods += """
-                override suspend fun ${kotlinServiceMethodName}(request: $reqType): $respType {
+                override suspend fun ${kotlinServiceMethodName}(request: $reqType, requestHeaders: Map<String, String>?): $respType {
                     val response: HttpResponse = httpClient.post("${service.file.packageName}.${service.name}/${method.name}") {
+                        requestHeaders?.forEach { headers.append(it.key, it.value) }
                         setBody(request.encodeToByteArray())
                     }
                     return $respType.decodeFromByteArray(response.body())
