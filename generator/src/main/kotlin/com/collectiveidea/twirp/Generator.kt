@@ -39,7 +39,6 @@ class Generator : ServiceGenerator {
         return listOf(
             interfaceKt(service.file.kotlinPackageName, service.name, filePath, interfaceMethods),
             implementationKt(
-                service.file.packageName,
                 service.file.kotlinPackageName,
                 service.name,
                 filePath,
@@ -65,14 +64,14 @@ class Generator : ServiceGenerator {
     }
 
     private fun interfaceKt(
-        packageName: String?,
+        kotlinPackageName: String?,
         serviceName: String,
         filePath: Path,
         interfaceMethods: MutableList<String>
     ) = ServiceGenerator.Result(
         otherFilePath = filePath.resolveSibling("${serviceName}.kt").toString(),
         code = """
-            package $packageName
+            package $kotlinPackageName
             
             import com.collectiveidea.twirp.ServiceException
             import kotlin.coroutines.cancellation.CancellationException
@@ -84,7 +83,6 @@ class Generator : ServiceGenerator {
     )
 
     private fun implementationKt(
-        packageName: String?,
         kotlinPackageName: String?,
         serviceName: String,
         filePath: Path,
