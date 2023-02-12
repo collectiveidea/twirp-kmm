@@ -22,12 +22,13 @@ class Generator : ServiceGenerator {
 
             interfaceMethods += """
                 @Throws(ServiceException::class, CancellationException::class)
-                suspend fun ${kotlinServiceMethodName}(request: $reqType): $respType
+                suspend fun ${kotlinServiceMethodName}(request: $reqType, requestHeaders: Map<String, String>? = null): $respType
              """.trimIndent()
 
             implementationMethods += """
-                override suspend fun ${kotlinServiceMethodName}(request: $reqType): $respType {
+                override suspend fun ${kotlinServiceMethodName}(request: $reqType, requestHeaders: Map<String, String>?): $respType {
                     val response: HttpResponse = httpClient.post("${service.file.packageName}.${service.name}/${method.name}") {
+                        requestHeaders?.forEach { headers.append(it.key, it.value) }
                         setBody(request.encodeToByteArray())
                     }
                     return $respType.decodeFromByteArray(response.body())
@@ -38,7 +39,6 @@ class Generator : ServiceGenerator {
         return listOf(
             interfaceKt(service.file.kotlinPackageName, service.name, filePath, interfaceMethods),
             implementationKt(
-                service.file.packageName,
                 service.file.kotlinPackageName,
                 service.name,
                 filePath,
@@ -64,14 +64,14 @@ class Generator : ServiceGenerator {
     }
 
     private fun interfaceKt(
-        packageName: String?,
+        kotlinPackageName: String?,
         serviceName: String,
         filePath: Path,
         interfaceMethods: MutableList<String>
     ) = ServiceGenerator.Result(
         otherFilePath = filePath.resolveSibling("${serviceName}.kt").toString(),
         code = """
-            package $packageName
+            package $kotlinPackageName
             
             import com.collectiveidea.twirp.ServiceException
             import kotlin.coroutines.cancellation.CancellationException
@@ -83,7 +83,6 @@ class Generator : ServiceGenerator {
     )
 
     private fun implementationKt(
-        packageName: String?,
         kotlinPackageName: String?,
         serviceName: String,
         filePath: Path,
