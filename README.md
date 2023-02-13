@@ -1,6 +1,6 @@
 # PBandK Service Generator and Runtime for Twirp KMM
 
-This project is a [service generator plugin](https://github.com/streem/pbandk#service-code-generation) for [PBandK](https://github.com/streem/pbandk) that generates Kotlin client integration for [Twirp](https://github.com/twitchtv/twirp) services. The generated client code leverages [PBandK](https://github.com/streem/pbandk) for protobuf messages, [kotlinx.serialization](https://github.com/Kotlin/kotlinx.serialization) for [JSON handling of Twirp service errors](https://twitchtv.github.io/twirp/docs/errors.html), and [KTor](https://github.com/ktorio/ktor) for HTTP. All of these choices enable the generated client code to be leveraged in [Kotlin Multiplatform Mobile](https://kotlinlang.org/lp/mobile/) projects, sharing the network integration layer with both iOS and Android native apps.
+This project is a [service generator plugin](https://github.com/streem/pbandk#service-code-generation) for [PBandK](https://github.com/streem/pbandk) that generates Kotlin client integration for [Twirp](https://github.com/twitchtv/twirp) services. The generated client code leverages [PBandK](https://github.com/streem/pbandk) for protobuf messages, [kotlinx.serialization](https://github.com/Kotlin/kotlinx.serialization) for [JSON handling of Twirp service errors](https://twitchtv.github.io/twirp/docs/errors.html), and [Ktor](https://github.com/ktorio/ktor) for HTTP. All of these choices enable the generated client code to be leveraged in [Kotlin Multiplatform Mobile](https://kotlinlang.org/lp/mobile/) projects, sharing the network integration layer with both iOS and Android native apps.
 
 There are two parts to this project - the [generator](./generator) itself, and the supporting [runtime](./runtime) for leveraging the generated service code.
 
@@ -44,7 +44,7 @@ protoc --pbandk_out=kotlin_service_gen='/Users/darron/Development/twirp-kmm/gene
 
 ## Runtime
 
-The runtime provides an [`installTwirp`](./runtime/src/commonMain/kotlin/com/collectiveidea/twirp/HttpClientTwirpHelper.kt) helper for configuration a KTor HTTPClient for Twirp integration.
+The runtime provides an [`installTwirp`](./runtime/src/commonMain/kotlin/com/collectiveidea/twirp/HttpClientTwirpHelper.kt) helper to configure a Ktor HttpClient for Twirp integration.
 
 First, add the runtime as a dependency:
 
@@ -52,7 +52,7 @@ First, add the runtime as a dependency:
 implementation "com.collectiveidea.twirp:twirp-kmm-runtime:0.1.0"
 ```
 
-Then, configure the HTTPClient and pass the client into the generated service constructor:
+Then, configure the HttpClient and pass the client into the generated service constructor:
 
 ```kotlin
 val client = HttpClient(engine) {    
