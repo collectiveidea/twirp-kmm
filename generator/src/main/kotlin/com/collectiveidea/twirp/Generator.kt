@@ -22,16 +22,16 @@ class Generator : ServiceGenerator {
 
             interfaceMethods += """
                 @Throws(ServiceException::class, CancellationException::class)
-                suspend fun ${kotlinServiceMethodName}(request: $reqType, requestHeaders: Map<String, String>? = null): $respType
+                suspend fun ${kotlinServiceMethodName}(request: $reqType, requestHeaders: Headers? = null): Pair<$respType, Headers>
              """.trimIndent()
 
             implementationMethods += """
-                override suspend fun ${kotlinServiceMethodName}(request: $reqType, requestHeaders: Map<String, String>?): $respType {
+                override suspend fun ${kotlinServiceMethodName}(request: $reqType, requestHeaders: Headers?): Pair<$respType, Headers> {
                     val response: HttpResponse = httpClient.post("${service.file.packageName}.${service.name}/${method.name}") {
                         requestHeaders?.forEach { headers.append(it.key, it.value) }
                         setBody(request.encodeToByteArray())
                     }
-                    return $respType.decodeFromByteArray(response.body())
+                    return Pair($respType.decodeFromByteArray(response.body()), response.headers)
                 }
             """.trimIndent()
         }
@@ -74,6 +74,7 @@ class Generator : ServiceGenerator {
             package $kotlinPackageName
             
             import com.collectiveidea.twirp.ServiceException
+            import io.ktor.http.Headers
             import kotlin.coroutines.cancellation.CancellationException
             
             interface $serviceName {
@@ -97,6 +98,7 @@ class Generator : ServiceGenerator {
             import io.ktor.client.request.post
             import io.ktor.client.request.setBody
             import io.ktor.client.statement.HttpResponse
+            import io.ktor.http.Headers
             import pbandk.decodeFromByteArray
             import pbandk.encodeToByteArray
             
