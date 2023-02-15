@@ -28,7 +28,7 @@ class Generator : ServiceGenerator {
             implementationMethods += """
                 override suspend fun ${kotlinServiceMethodName}(request: $reqType, requestHeaders: Headers?): Pair<$respType, Headers> {
                     val response: HttpResponse = httpClient.post("${service.file.packageName}.${service.name}/${method.name}") {
-                        requestHeaders?.forEach { headers.append(it.key, it.value) }
+                        requestHeaders?.let { headers.appendAll(it) }
                         setBody(request.encodeToByteArray())
                     }
                     return Pair($respType.decodeFromByteArray(response.body()), response.headers)
