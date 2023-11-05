@@ -47,7 +47,6 @@ android {
 
     defaultConfig {
         minSdk = 23
-        targetSdk = 33
     }
     namespace = "com.collectiveidea"
 }
