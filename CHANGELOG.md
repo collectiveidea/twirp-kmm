@@ -6,6 +6,8 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 
 ## [Unreleased]
 
+## [0.3.2] - 2023-12-06
+
 ### Changed
 
  * Bump Kotlin version from 1.8.10 to 1.9.21

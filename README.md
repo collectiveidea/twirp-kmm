@@ -10,12 +10,12 @@ In general, follow [PBandK Usage](https://github.com/streem/pbandk#usage) instru
 
 ### Usage
 
-Download the latest release, currently `0.3.1`, and pass it to `protoc` via `pbandk`:
+Download the latest release, currently `0.3.2`, and pass it to `protoc` via `pbandk`:
 
 ```bash
 # Download the library to ~
 cd ~/
-curl -OL https://github.com/collectiveidea/twirp-kmm/releases/download/0.3.1/twirp-kmm-generator-0.3.1.jar
+curl -OL https://github.com/collectiveidea/twirp-kmm/releases/download/0.3.2/twirp-kmm-generator-0.3.2.jar
 ```
 
 
@@ -23,7 +23,7 @@ Pass the jar and generator class name as the `kotlin_service_gen` option to `pba
 
 ```bash
 cd ~/exampleProject
-protoc --pbandk_out=kotlin_service_gen='~/twirp-kmm-generator-0.3.1.jar|com.collectiveidea.twirp.Generator',kotlin_package=com.example.api:src/main/kotlin src/main/proto/example.proto
+protoc --pbandk_out=kotlin_service_gen='~/twirp-kmm-generator-0.3.2.jar|com.collectiveidea.twirp.Generator',kotlin_package=com.example.api:src/main/kotlin src/main/proto/example.proto
 ```
 
 ### Build
@@ -34,12 +34,12 @@ To build the library locally, run:
 ./gradlew build
 ```
 
-This creates the versioned `.jar` file, e.g. `generator/build/libs/twirp-kmm-generator-0.3.1-SNAPSHOT.jar`
+This creates the versioned `.jar` file, e.g. `generator/build/libs/twirp-kmm-generator-0.3.2-SNAPSHOT.jar`
 
 Then, the built version can be used, instead of the latest release, by supplying the path to the built `.jar`, e.g.:
 
 ```bash
-protoc --pbandk_out=kotlin_service_gen='/Users/darron/Development/twirp-kmm/generator/build/libs/twirp-kmm-generator-0.3.1-SNAPSHOT.jar|com.collectiveidea.twirp.Generator',kotlin_package=com.example.api:shared/src/commonMain/kotlin shared/src/commonMain/proto/example.proto
+protoc --pbandk_out=kotlin_service_gen='/Users/darron/Development/twirp-kmm/generator/build/libs/twirp-kmm-generator-0.3.2-SNAPSHOT.jar|com.collectiveidea.twirp.Generator',kotlin_package=com.example.api:shared/src/commonMain/kotlin shared/src/commonMain/proto/example.proto
 ```
 
 ## Runtime
@@ -49,7 +49,7 @@ The runtime provides an [`installTwirp`](./runtime/src/commonMain/kotlin/com/col
 First, add the runtime as a dependency:
 
 ```
-implementation "com.collectiveidea.twirp:twirp-kmm-runtime:0.3.1"
+implementation "com.collectiveidea.twirp:twirp-kmm-runtime:0.3.2"
 ```
 
 Then, configure the HttpClient and pass the client into the generated service constructor:
