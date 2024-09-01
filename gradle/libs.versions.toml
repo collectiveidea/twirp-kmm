@@ -4,7 +4,7 @@ android-gradle-plugin = "8.5.2"
 
 kotlinx-serialization = "1.7.1"
 ktor = "2.3.12"
-pbandk = "0.14.2"
+pbandk = "0.15.0"
 
 [libraries]
 kotlin-test = { module = "org.jetbrains.kotlin:kotlin-test", version.ref = "kotlin" }
