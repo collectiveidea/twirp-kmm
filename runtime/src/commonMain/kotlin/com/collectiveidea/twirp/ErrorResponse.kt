@@ -16,12 +16,18 @@ import kotlinx.serialization.json.JsonPrimitive
 data class ErrorResponse(
     val code: ErrorCode = ErrorCode.Unknown,
     val msg: String,
-    val meta: Map<String, @Serializable(with = AnySerializer::class) Any?>? = null
+    val meta: Map<
+        String,
+        @Serializable(with = AnySerializer::class)
+        Any?,
+    >? = null,
 )
 
 // See: https://github.com/twitchtv/twirp/blob/main/docs/spec_v7.md#error-codes
 @Serializable
-enum class ErrorCode(val statusCode: Int) {
+enum class ErrorCode(
+    val statusCode: Int,
+) {
     @SerialName("canceled")
     Canceled(HttpStatusCode.RequestTimeout.value),
 
@@ -74,7 +80,7 @@ enum class ErrorCode(val statusCode: Int) {
     Unavailable(HttpStatusCode.ServiceUnavailable.value),
 
     @SerialName("dataloss")
-    Dataloss(HttpStatusCode.InternalServerError.value)
+    Dataloss(HttpStatusCode.InternalServerError.value),
 }
 
 // `Any?` does not appear to be supported out of the box in kotlinx-serialization. With
@@ -97,8 +103,8 @@ fun Any?.toJsonElement(): JsonElement = when (this) {
 }
 
 fun Collection<*>.toJsonArray() = JsonArray(map { it.toJsonElement() })
-fun Map<*, *>.toJsonObject() =
-    JsonObject(mapKeys { it.key.toString() }.mapValues { it.value.toJsonElement() })
+
+fun Map<*, *>.toJsonObject() = JsonObject(mapKeys { it.key.toString() }.mapValues { it.value.toJsonElement() })
 
 //
 // Deserialize
@@ -133,19 +139,21 @@ private fun JsonPrimitive.toAnyValue(): Any? {
     throw Exception("Cannot convert JSON $content to value")
 }
 
-private fun JsonElement.toAnyOrNull(): Any? {
-    return when (this) {
-        is JsonNull -> null
-        is JsonPrimitive -> toAnyValue()
-        is JsonObject -> this.map { it.key to it.value.toAnyOrNull() }.toMap()
-        is JsonArray -> this.map { it.toAnyOrNull() }
-    }
+private fun JsonElement.toAnyOrNull(): Any? = when (this) {
+    is JsonNull -> null
+    is JsonPrimitive -> toAnyValue()
+    is JsonObject -> this.map { it.key to it.value.toAnyOrNull() }.toMap()
+    is JsonArray -> this.map { it.toAnyOrNull() }
 }
 
 object AnySerializer : KSerializer<Any?> {
     private val delegateSerializer = JsonElement.serializer()
     override val descriptor = delegateSerializer.descriptor
-    override fun serialize(encoder: Encoder, value: Any?) {
+
+    override fun serialize(
+        encoder: Encoder,
+        value: Any?,
+    ) {
         encoder.encodeSerializableValue(delegateSerializer, value.toJsonElement())
     }
 

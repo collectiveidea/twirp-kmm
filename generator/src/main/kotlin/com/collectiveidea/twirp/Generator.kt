@@ -22,11 +22,11 @@ class Generator : ServiceGenerator {
 
             interfaceMethods += """
                 @Throws(ServiceException::class, CancellationException::class)
-                suspend fun ${kotlinServiceMethodName}(request: $reqType, requestHeaders: Headers? = null): Pair<$respType, Headers>
-             """.trimIndent()
+                suspend fun $kotlinServiceMethodName(request: $reqType, requestHeaders: Headers? = null): Pair<$respType, Headers>
+            """.trimIndent()
 
             implementationMethods += """
-                override suspend fun ${kotlinServiceMethodName}(request: $reqType, requestHeaders: Headers?): Pair<$respType, Headers> {
+                override suspend fun $kotlinServiceMethodName(request: $reqType, requestHeaders: Headers?): Pair<$respType, Headers> {
                     val response: HttpResponse = httpClient.post("${service.file.packageName}.${service.name}/${method.name}") {
                         requestHeaders?.let { headers.appendAll(it) }
                         setBody(request.encodeToByteArray())
@@ -42,34 +42,36 @@ class Generator : ServiceGenerator {
                 service.file.kotlinPackageName,
                 service.name,
                 filePath,
-                implementationMethods
-            )
+                implementationMethods,
+            ),
         )
     }
 
     private fun repeatMethods(methods: List<String>): String {
-        // For each method...
-        return methods.map {
-                // For each line...
-                it.split("\n")
+        return methods
+            // For each method...
+            .map {
+                it
+                    // For each line...
+                    .split("\n")
                     // .. add the appropriate spacing indentation in front of the line
                     .joinToString("\n                ")
             }.map {
                 // Add a new line after each method
                 it + "\n"
             }
-                // Add a blank line and indent the start of each method
-                .joinToString("\n                ")
-                .dropLast(1) // Drop trailing newline after the last method
+            // Add a blank line and indent the start of each method
+            .joinToString("\n                ")
+            .dropLast(1) // Drop trailing newline after the last method
     }
 
     private fun interfaceKt(
         kotlinPackageName: String?,
         serviceName: String,
         filePath: Path,
-        interfaceMethods: MutableList<String>
+        interfaceMethods: MutableList<String>,
     ) = ServiceGenerator.Result(
-        otherFilePath = filePath.resolveSibling("${serviceName}.kt").toString(),
+        otherFilePath = filePath.resolveSibling("$serviceName.kt").toString(),
         code = """
             package $kotlinPackageName
             
@@ -80,14 +82,14 @@ class Generator : ServiceGenerator {
             interface $serviceName {
                 ${repeatMethods(interfaceMethods)}
             }${'\n'}
-""".trimIndent()
+        """.trimIndent(),
     )
 
     private fun implementationKt(
         kotlinPackageName: String?,
         serviceName: String,
         filePath: Path,
-        implementationMethods: MutableList<String>
+        implementationMethods: MutableList<String>,
     ) = ServiceGenerator.Result(
         otherFilePath = filePath.resolveSibling("${serviceName}Impl.kt").toString(),
         code = """
@@ -113,14 +115,12 @@ class Generator : ServiceGenerator {
             class ${serviceName}Impl(val httpClient: HttpClient) : $serviceName {
                 ${repeatMethods(implementationMethods)}
             }${'\n'}
-        """.trimIndent()
+        """.trimIndent(),
     )
 
-    private fun String.lowercasedFirstLetter(): String {
-        return when (this.length) {
-            0 -> ""
-            1 -> this.lowercase(Locale.getDefault())
-            else -> this[0].lowercase(Locale.getDefault()) + this.substring(1)
-        }
+    private fun String.lowercasedFirstLetter(): String = when (this.length) {
+        0 -> ""
+        1 -> this.lowercase(Locale.getDefault())
+        else -> this[0].lowercase(Locale.getDefault()) + this.substring(1)
     }
 }
