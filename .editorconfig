@@ -1,0 +1,40 @@
+# EditorConfig is awesome: https://EditorConfig.org
+
+# Top-most EditorConfig file
+root = true
+
+# Unix-style newlines with a newline ending every file
+[*]
+end_of_line = lf
+insert_final_newline = true
+
+# YAML files
+[*.yml]
+indent_style = space
+indent_size = 2
+
+# KtLint
+[*.{kt,kts}]
+ktlint_code_style = ktlint_official
+
+# Disable multiline-expression wrapping. This allows complex expressions to start on the same
+# line as the `=`, e.g. `= Modifier`, and `= listOf(`
+# See: https://pinterest.github.io/ktlint/1.3.1/rules/standard/#multiline-expression-wrapping
+ktlint_standard_multiline-expression-wrapping = disabled
+# Also need to disable the related rule so string templates behave similarly, e.g. `= """`
+# See: https://pinterest.github.io/ktlint/1.3.1/rules/standard/#string-template-indent
+ktlint_standard_string-template-indent = disabled
+
+# Only wrap functions when there is not enough space on the line
+# See: https://pinterest.github.io/ktlint/1.3.1/rules/standard/#function-signature
+ktlint_function_signature_body_expression_wrapping = default
+ktlint_function_signature_rule_force_multiline_when_parameter_count_greater_or_equal_than = 2
+
+# Allow blank lines in lists, which can be useful to help visually break things up
+# and group related function params together
+# See: https://pinterest.github.io/ktlint/1.3.1/rules/standard/#no-blank-lines-in-list
+ktlint_standard_no-blank-line-in-list = disabled
+
+[**/build/generated/**]
+# Ignore generated code
+ktlint_standard = disabled
