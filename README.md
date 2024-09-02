@@ -1,3 +1,5 @@
+[![ktlint](https://img.shields.io/badge/ktlint%20code--style-%E2%9D%A4-FF4081)](https://pinterest.github.io/ktlint/)
+
 # PBandK Service Generator and Runtime for Twirp KMM
 
 This project is a [service generator plugin](https://github.com/streem/pbandk#service-code-generation) for [PBandK](https://github.com/streem/pbandk) that generates Kotlin client integration for [Twirp](https://github.com/twitchtv/twirp) services. The generated client code leverages [PBandK](https://github.com/streem/pbandk) for protobuf messages, [kotlinx.serialization](https://github.com/Kotlin/kotlinx.serialization) for [JSON handling of Twirp service errors](https://twitchtv.github.io/twirp/docs/errors.html), and [Ktor](https://github.com/ktorio/ktor) for HTTP. All of these choices enable the generated client code to be leveraged in [Kotlin Multiplatform Mobile](https://kotlinlang.org/lp/mobile/) projects, sharing the network integration layer with both iOS and Android native apps.
