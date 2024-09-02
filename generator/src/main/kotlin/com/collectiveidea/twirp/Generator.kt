@@ -3,7 +3,7 @@ package com.collectiveidea.twirp
 import pbandk.gen.ServiceGenerator
 import java.nio.file.Path
 import java.nio.file.Paths
-import java.util.*
+import java.util.Locale
 
 var firstRun = true
 
