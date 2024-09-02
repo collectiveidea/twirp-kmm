@@ -18,8 +18,8 @@ dependencies {
     // itself only needs it for compile-time. See README.md#Usage for details.
     testImplementation(libs.pbandk.protoc.gen)
 
-    testImplementation(kotlin("test"))
-    testImplementation(kotlin("test-junit"))
+    testImplementation(libs.kotlin.test)
+    testImplementation(libs.kotlin.test.junit)
 }
 
 tasks.jar {
