@@ -14,7 +14,7 @@ class ErrorResponseTest {
     }
 
     @Test
-    fun `decodes properly with missing meta`() {
+    fun decodes_properly_with_missing_meta() {
         val error = decode("""{"code":"not_found","msg":"not found"}""")
 
         assertEquals(ErrorCode.NotFound, error.code)
@@ -23,7 +23,7 @@ class ErrorResponseTest {
     }
 
     @Test
-    fun `decodes unrecognized enum as enum`() {
+    fun decodes_unrecognized_enum_as_enum() {
         val error = decode("""{"code":"this_is_not_available","msg":"new error code"}""")
 
         assertEquals(ErrorCode.Unknown, error.code)
@@ -31,7 +31,7 @@ class ErrorResponseTest {
     }
 
     @Test
-    fun `decodes meta with arbitrary values`() {
+    fun decodes_meta_with_arbitrary_values() {
         val error = decode(
             """{
             "code":"canceled",
