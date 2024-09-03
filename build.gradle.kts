@@ -32,7 +32,7 @@ val sonatypeUsername = gradlePropertyOrEnvironmentVariable("SONATYPE_USERNAME")
 val sonatypePassword = gradlePropertyOrEnvironmentVariable("SONATYPE_PASSWORD")
 if (sonatypeUsername != null) {
     subprojects {
-        plugins.withType<MavenPublishPlugin>() {
+        plugins.withType<MavenPublishPlugin> {
             configure<PublishingExtension> {
                 repositories {
                     maven {

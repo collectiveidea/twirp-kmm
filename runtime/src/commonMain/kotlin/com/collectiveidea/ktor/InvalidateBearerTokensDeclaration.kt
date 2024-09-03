@@ -10,9 +10,11 @@ import io.ktor.client.plugins.plugin
 // and https://youtrack.jetbrains.com/issue/KTOR-4759/Auth-BearerAuthProvider-caches-result-of-loadToken-until-process-death
 fun HttpClient.invalidateBearerTokens() {
     try {
-        plugin(Auth).providers
+        plugin(Auth)
+            .providers
             .filterIsInstance<BearerAuthProvider>()
-            .first().clearToken()
+            .first()
+            .clearToken()
     } catch (e: IllegalStateException) {
         // No-op; plugin not installed
     }

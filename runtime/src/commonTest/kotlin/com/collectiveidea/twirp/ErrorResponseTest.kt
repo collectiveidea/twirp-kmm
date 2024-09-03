@@ -50,7 +50,7 @@ class ErrorResponseTest {
                 "key6": null
             }
         }
-            """.trimIndent()
+            """.trimIndent(),
         )
 
         val meta = error.meta
