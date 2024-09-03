@@ -1,8 +1,46 @@
-# Ignore Gradle project-specific cache directory
-.gradle
+#
+# JetBrains
+#
 
-# Ignore Gradle build output directory
-build
+# IDE files
+.idea
+*.iml
+
+# Gradle files
+.gradle/
+build/
+
+# Kotlin
+.kotlin
 
 # Local configuration file (sdk path, etc)
 local.properties
+
+# Log/OS Files
+*.log
+
+# Android Studio generated files and folders
+captures/
+.externalNativeBuild/
+.cxx/
+*.apk
+output.json
+
+#
+# MacOS
+#
+.DS_Store
+
+#
+# Xcode
+#
+
+## User settings
+xcuserdata/
+
+## Obj-C/Swift specific
+*.hmap
+
+## Playgrounds
+timeline.xctimeline
+playground.xcworkspace
