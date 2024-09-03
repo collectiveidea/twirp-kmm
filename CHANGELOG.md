@@ -8,6 +8,7 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 
 ### Changed
 
+ * Runtime - Add additional targets (`js`, `jvm`, etc) (see [#13](https://github.com/collectiveidea/twirp-kmm/pull/13))
  * Runtime - Enabled Explicit API mode (see [#11](https://github.com/collectiveidea/twirp-kmm/pull/11)). This
    might hide some of our internal library helpers from downstream consumers.
  * Update dependencies
