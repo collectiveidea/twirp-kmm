@@ -1,0 +1,50 @@
+name: Build and Test
+
+on:
+  pull_request:
+    paths-ignore:
+      - "**.md"
+  push:
+    branches:
+      - main
+  workflow_dispatch:
+
+jobs:
+  build-and-test:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Validate Gradle Wrapper
+        uses: gradle/wrapper-validation-action@v3
+
+      - name: Cache Gradle
+        uses: actions/cache@v4
+        with:
+          path: |
+            ~/.gradle/caches
+            ~/.gradle/wrapper
+            ~/.konan
+          key: ${{ runner.os }}-gradle-${{ hashFiles('**/*.gradle*') }}
+          restore-keys: |
+            ${{ runner.os }}-gradle-
+
+      - name: Setup Java 21
+        uses: actions/setup-java@v4
+        with:
+          distribution: zulu
+          java-version: 21
+
+      - name: Build (Generator)
+        run: ./gradlew twirp-kmm-generator:build
+
+      - name: Test (Runtime)
+        run: ./gradlew twirp-kmm-runtime:testReleaseUnitTest
+
+      - name: Archive Runtime Test Report
+        if: success() || failure() # Allow canceling per https://stackoverflow.com/a/73015952
+        uses: actions/upload-artifact@v4
+        with:
+          name: testReleaseUnitTest report
+          path: runtime/build/reports/tests/testReleaseUnitTest
