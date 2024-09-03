@@ -22,7 +22,7 @@ private val twirpErrorJsonDecoder: Json by lazy {
  * @param baseUrl The base URL of the root Twirp service, excluding the protobuf service name, and
  *  with a trailing slash: e.g. `https://www.example.com/twirp/`
  */
-fun HttpClientConfig<*>.installTwirp(baseUrl: String) {
+public fun HttpClientConfig<*>.installTwirp(baseUrl: String) {
     expectSuccess = true
 
     defaultRequest {

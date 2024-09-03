@@ -13,7 +13,7 @@ import kotlinx.serialization.json.JsonObject
 import kotlinx.serialization.json.JsonPrimitive
 
 @Serializable
-data class ErrorResponse(
+public data class ErrorResponse(
     val code: ErrorCode = ErrorCode.Unknown,
     val msg: String,
     val meta: Map<
@@ -25,8 +25,8 @@ data class ErrorResponse(
 
 // See: https://github.com/twitchtv/twirp/blob/main/docs/spec_v7.md#error-codes
 @Serializable
-enum class ErrorCode(
-    val statusCode: Int,
+public enum class ErrorCode(
+    public val statusCode: Int,
 ) {
     @SerialName("canceled")
     Canceled(HttpStatusCode.RequestTimeout.value),
@@ -92,7 +92,7 @@ enum class ErrorCode(
 // Serialize
 //
 
-fun Any?.toJsonElement(): JsonElement = when (this) {
+internal fun Any?.toJsonElement(): JsonElement = when (this) {
     is Number -> JsonPrimitive(this)
     is Boolean -> JsonPrimitive(this)
     is String -> JsonPrimitive(this)
@@ -102,9 +102,9 @@ fun Any?.toJsonElement(): JsonElement = when (this) {
     else -> JsonNull
 }
 
-fun Collection<*>.toJsonArray() = JsonArray(map { it.toJsonElement() })
+internal fun Collection<*>.toJsonArray() = JsonArray(map { it.toJsonElement() })
 
-fun Map<*, *>.toJsonObject() = JsonObject(mapKeys { it.key.toString() }.mapValues { it.value.toJsonElement() })
+internal fun Map<*, *>.toJsonObject() = JsonObject(mapKeys { it.key.toString() }.mapValues { it.value.toJsonElement() })
 
 //
 // Deserialize
@@ -139,14 +139,14 @@ private fun JsonPrimitive.toAnyValue(): Any? {
     throw Exception("Cannot convert JSON $content to value")
 }
 
-private fun JsonElement.toAnyOrNull(): Any? = when (this) {
+internal fun JsonElement.toAnyOrNull(): Any? = when (this) {
     is JsonNull -> null
     is JsonPrimitive -> toAnyValue()
     is JsonObject -> this.map { it.key to it.value.toAnyOrNull() }.toMap()
     is JsonArray -> this.map { it.toAnyOrNull() }
 }
 
-object AnySerializer : KSerializer<Any?> {
+internal object AnySerializer : KSerializer<Any?> {
     private val delegateSerializer = JsonElement.serializer()
     override val descriptor = delegateSerializer.descriptor
 
