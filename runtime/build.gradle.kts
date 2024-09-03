@@ -8,7 +8,7 @@ plugins {
     signing
 }
 
-description = "Runtime for Twirp service generator PBandK plugin for use in Kotlin Multiplatform Mobile projects."
+description = "Runtime for Twirp service generator PBandK plugin for use in Kotlin Multiplatform projects."
 
 kotlin {
     explicitApi()
@@ -16,6 +16,38 @@ kotlin {
     androidTarget {
         publishAllLibraryVariants()
     }
+
+    jvm()
+
+    js {
+        browser {}
+        nodejs {}
+    }
+
+    // Native targets, according to https://kotlinlang.org/docs/native-target-support.html
+    // Tier 1
+    macosX64()
+    macosArm64()
+    iosSimulatorArm64()
+    iosX64()
+    // Tier 2
+    linuxX64()
+    linuxArm64()
+    // watchosSimulatorArm64()
+    // watchosX64()
+    // watchosArm32()
+    // watchosArm64()
+    tvosSimulatorArm64()
+    tvosX64()
+    tvosArm64()
+    iosArm64()
+    // Tier 3
+    // androidNativeArm32()
+    // androidNativeArm64()
+    // androidNativeX86()
+    // androidNativeX64()
+    mingwX64()
+    // watchosDeviceArm64()
 
     listOf(
         iosX64(),
