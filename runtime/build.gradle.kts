@@ -11,6 +11,8 @@ plugins {
 description = "Runtime for Twirp service generator PBandK plugin for use in Kotlin Multiplatform Mobile projects."
 
 kotlin {
+    explicitApi()
+
     androidTarget {
         publishAllLibraryVariants()
     }

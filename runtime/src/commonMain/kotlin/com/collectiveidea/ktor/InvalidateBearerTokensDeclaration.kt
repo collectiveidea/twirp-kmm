@@ -8,7 +8,7 @@ import io.ktor.client.plugins.plugin
 // Force the Auth plugin to invoke the `loadTokens` block again.
 // See: https://stackoverflow.com/q/72064782 and https://stackoverflow.com/a/67316630
 // and https://youtrack.jetbrains.com/issue/KTOR-4759/Auth-BearerAuthProvider-caches-result-of-loadToken-until-process-death
-fun HttpClient.invalidateBearerTokens() {
+public fun HttpClient.invalidateBearerTokens() {
     try {
         plugin(Auth)
             .providers

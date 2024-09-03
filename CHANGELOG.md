@@ -8,13 +8,16 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 
 ### Changed
 
- * Bump Kotlin from 1.9.21 to 2.0.20
- * Runtime - Bump kotlinx-serialization dependency from 1.6.0 to 1.7.1
- * Runtime - Bump ktor dependency from 2.3.6 to 2.3.12
- * Runtime - Bump Android Gradle Plugin from 8.1.2 to 8.5.2
- * Runtime - Bump Android Compile SDK to 34
- * Bump PBandK from 0.14.2 to 0.15.0
- * Bump gradle from 8.4 to 8.7
+ * Runtime - Enabled Explicit API mode (see [#11](https://github.com/collectiveidea/twirp-kmm/pull/11)). This
+   might hide some of our internal library helpers from downstream consumers.
+ * Update dependencies
+   * Bump Kotlin from 1.9.21 to 2.0.20
+   * Runtime - Bump kotlinx-serialization dependency from 1.6.0 to 1.7.1
+   * Runtime - Bump ktor dependency from 2.3.6 to 2.3.12
+   * Runtime - Bump Android Gradle Plugin from 8.1.2 to 8.5.2
+   * Runtime - Bump Android Compile SDK to 34
+   * Bump PBandK from 0.14.2 to 0.15.0
+   * Bump gradle from 8.4 to 8.7
 
 ## [0.3.2] - 2023-12-06
 

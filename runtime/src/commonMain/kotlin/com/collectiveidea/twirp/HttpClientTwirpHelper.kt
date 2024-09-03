@@ -9,7 +9,6 @@ import io.ktor.client.request.accept
 import io.ktor.client.statement.bodyAsText
 import io.ktor.http.ContentType
 import io.ktor.http.contentType
-import kotlinx.serialization.decodeFromString
 import kotlinx.serialization.json.Json
 
 private val twirpErrorJsonDecoder: Json by lazy {
@@ -22,7 +21,7 @@ private val twirpErrorJsonDecoder: Json by lazy {
  * @param baseUrl The base URL of the root Twirp service, excluding the protobuf service name, and
  *  with a trailing slash: e.g. `https://www.example.com/twirp/`
  */
-fun HttpClientConfig<*>.installTwirp(baseUrl: String) {
+public fun HttpClientConfig<*>.installTwirp(baseUrl: String) {
     expectSuccess = true
 
     defaultRequest {
