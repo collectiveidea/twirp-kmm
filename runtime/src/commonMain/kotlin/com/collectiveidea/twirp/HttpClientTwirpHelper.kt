@@ -9,7 +9,6 @@ import io.ktor.client.request.accept
 import io.ktor.client.statement.bodyAsText
 import io.ktor.http.ContentType
 import io.ktor.http.contentType
-import kotlinx.serialization.decodeFromString
 import kotlinx.serialization.json.Json
 
 private val twirpErrorJsonDecoder: Json by lazy {
