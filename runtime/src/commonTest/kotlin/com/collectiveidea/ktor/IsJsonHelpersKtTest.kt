@@ -9,19 +9,19 @@ import kotlin.test.assertTrue
 
 class IsJsonHelpersKtTest {
     @Test
-    fun `ContentType isJson returns true when missing charset`() {
+    fun contentType_isJson_returns_true_when_missing_charset() {
         val contentType = ContentType.Application.Json
         assertTrue(contentType.isJson())
     }
 
     @Test
-    fun `ContentType isJson returns true when charset present`() {
+    fun contentType_isJson_returns_true_when_charset_present() {
         val contentType = ContentType.Application.Json.withCharset(Charsets.UTF_8)
         assertTrue(contentType.isJson())
     }
 
     @Test
-    fun `ContentType isJson returns false when not explicitly json`() {
+    fun contentType_isJson_returns_false_when_not_explicitly_json() {
         val contentType = ContentType.Application.Any
         assertFalse(contentType.isJson())
     }
