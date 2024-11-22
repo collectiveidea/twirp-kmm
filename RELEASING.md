@@ -31,9 +31,9 @@
    ```
 
 8. Create GitHub Release
-   1. Visit the [New Releases](https://github.com/collectiveidea/twirp-kmm/releases/new) page.
+   1. Visit the [New Releases](https://github.com/collectiveidea/twirp-kmp/releases/new) page.
    2. Supply release version and changelog
-   3. Upload `generator/build/libs/twirp-kmm-generator-X.Y.Z.jar` artifact.
+   3. Upload `generator/build/libs/twirp-kmp-generator-X.Y.Z.jar` artifact.
 
 9. Publish (runtime)
 
