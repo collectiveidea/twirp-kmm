@@ -89,7 +89,7 @@ android {
         targetCompatibility = JavaVersion.VERSION_1_8
     }
 
-    namespace = "com.collectiveidea"
+    namespace = "com.collectiveidea.twirp"
 }
 
 tasks.withType<org.jetbrains.kotlin.gradle.tasks.KotlinJvmCompile>().configureEach {
