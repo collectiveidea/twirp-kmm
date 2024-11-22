@@ -37,10 +37,10 @@ jobs:
           java-version: 21
 
       - name: Build (Generator)
-        run: ./gradlew twirp-kmm-generator:build
+        run: ./gradlew twirp-kmp-generator:build
 
       - name: Test (Runtime)
-        run: ./gradlew twirp-kmm-runtime:testReleaseUnitTest
+        run: ./gradlew twirp-kmp-runtime:testReleaseUnitTest
 
       - name: Archive Runtime Test Report
         if: success() || failure() # Allow canceling per https://stackoverflow.com/a/73015952

@@ -55,7 +55,7 @@ kotlin {
         iosSimulatorArm64(),
     ).forEach {
         it.binaries.framework {
-            baseName = "twirp-kmm-runtime"
+            baseName = "twirp-kmp-runtime"
         }
     }
 
@@ -89,7 +89,7 @@ android {
         targetCompatibility = JavaVersion.VERSION_1_8
     }
 
-    namespace = "com.collectiveidea"
+    namespace = "com.collectiveidea.twirp"
 }
 
 tasks.withType<org.jetbrains.kotlin.gradle.tasks.KotlinJvmCompile>().configureEach {
@@ -104,7 +104,7 @@ publishing {
     publications.withType<MavenPublication> {
         artifact(javadocJar.get())
 
-        configureTwirpKmmPOM(project.description!!)
+        configureTwirpKmpPOM(project.description!!)
     }
 }
 
