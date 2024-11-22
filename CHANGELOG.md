@@ -6,6 +6,7 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 
 ## [Unreleased]
 
+ * **BREAKING** Rename project from twirp-kmm to twirp-kmp. See [#16](https://github.com/collectiveidea/twirp-kmm/pull/16)
  * Generator - Ensure generator .jar artifact is built for Java 8. See [#15](https://github.com/collectiveidea/twirp-kmm/pull/15).
 
 ## [0.4.0] - 2024-09-03
