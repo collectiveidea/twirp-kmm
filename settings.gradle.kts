@@ -6,10 +6,10 @@ pluginManagement {
     }
 }
 
-rootProject.name = "twirp-kmm"
+rootProject.name = "twirp-kmp"
 
-include("generator")
-project(":generator").name = "twirp-kmm-generator"
+include(":generator")
+project(":generator").name = "twirp-kmp-generator"
 
 include(":runtime")
-project(":runtime").name = "twirp-kmm-runtime"
+project(":runtime").name = "twirp-kmp-runtime"
