@@ -55,7 +55,7 @@ kotlin {
         iosSimulatorArm64(),
     ).forEach {
         it.binaries.framework {
-            baseName = "twirp-kmm-runtime"
+            baseName = "twirp-kmp-runtime"
         }
     }
 
