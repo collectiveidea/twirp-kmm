@@ -1,6 +1,6 @@
 import org.gradle.api.publish.maven.MavenPublication
 
-fun MavenPublication.configureTwirpKmmPOM(pomDescription: String) {
+fun MavenPublication.configureTwirpKmpPOM(pomDescription: String) {
     val pomName = artifactId
 
     pom {
@@ -14,16 +14,16 @@ fun MavenPublication.configureTwirpKmmPOM(pomDescription: String) {
             }
         }
 
-        url.set("https://github.com/collectiveidea/twirp-kmm")
+        url.set("https://github.com/collectiveidea/twirp-kmp")
 
         issueManagement {
             system.set("Github")
-            url.set("https://github.com/collectiveidea/twirp-kmm/issues")
+            url.set("https://github.com/collectiveidea/twirp-kmp/issues")
         }
 
         scm {
-            connection.set("https://github.com/collectiveidea/twirp-kmm.git")
-            url.set("https://github.com/collectiveidea/twirp-kmm")
+            connection.set("https://github.com/collectiveidea/twirp-kmp.git")
+            url.set("https://github.com/collectiveidea/twirp-kmp")
         }
 
         developers {

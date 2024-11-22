@@ -52,6 +52,6 @@ publishing {
     publications.withType<MavenPublication> {
         artifact(javadocJar.get())
 
-        configureTwirpKmmPOM(project.description!!)
+        configureTwirpKmpPOM(project.description!!)
     }
 }
