@@ -6,6 +6,11 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 
 ## [Unreleased]
 
+* Update dependencies. See [#17](https://github.com/collectiveidea/twirp-kmp/pull/17)
+    * Bump Kotlin from 2.0.20 to 2.0.21
+    * Runtime - Bump Ktor to 3.0.1
+    * Runtime - Bump kotlinx-serialization to 1.7.3
+    * Bump pbandk to 0.16.0
  * **BREAKING** Rename project from twirp-kmm to twirp-kmp. See [#16](https://github.com/collectiveidea/twirp-kmm/pull/16)
  * Generator - Ensure generator .jar artifact is built for Java 8. See [#15](https://github.com/collectiveidea/twirp-kmm/pull/15).
 
