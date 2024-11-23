@@ -46,7 +46,9 @@ class ErrorResponseTest {
                     "nestedKey3": 17,
                     "nestedKey4": [9, null]
                 },
-                "key6": null
+                "key6": null,
+                "key7": 12.53,
+                "key8": 4000000000
             }
         }
             """.trimIndent(),
@@ -72,6 +74,8 @@ class ErrorResponseTest {
                     "nestedKey4" to listOf(9, null),
                 ),
                 "key6" to null,
+                "key7" to 12.53,
+                "key8" to 4000000000,
             ),
             meta,
         )
