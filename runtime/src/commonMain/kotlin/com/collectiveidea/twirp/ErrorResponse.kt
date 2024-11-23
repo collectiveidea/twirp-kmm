@@ -124,19 +124,10 @@ private fun JsonPrimitive.toAnyValue(): Any? {
     if (content.equals("false", ignoreCase = true)) {
         return false
     }
-    val intValue = content.toIntOrNull()
-    if (intValue != null) {
-        return intValue
-    }
-    val longValue = content.toLongOrNull()
-    if (longValue != null) {
-        return longValue
-    }
-    val doubleValue = content.toDoubleOrNull()
-    if (doubleValue != null) {
-        return doubleValue
-    }
-    throw Exception("Cannot convert JSON $content to value")
+    return content.toIntOrNull()
+        ?: content.toLongOrNull()
+        ?: content.toDoubleOrNull()
+        ?: throw Exception("Cannot convert JSON $content to value")
 }
 
 internal fun JsonElement.toAnyOrNull(): Any? = when (this) {
