@@ -96,8 +96,8 @@ internal fun Any?.toJsonElement(): JsonElement = when (this) {
     is Number -> JsonPrimitive(this)
     is Boolean -> JsonPrimitive(this)
     is String -> JsonPrimitive(this)
-    is Map<*, *> -> this.toJsonObject()
-    is Collection<*> -> this.toJsonArray()
+    is Map<*, *> -> toJsonObject()
+    is Collection<*> -> toJsonArray()
     is JsonElement -> this
     else -> JsonNull
 }
@@ -112,7 +112,7 @@ internal fun Map<*, *>.toJsonObject() = JsonObject(mapKeys { it.key.toString() }
 
 private fun JsonPrimitive.toAnyValue(): Any? {
     val content = this.content
-    if (this.isString) {
+    if (isString) {
         return content
     }
     if (content.equals("null", ignoreCase = true)) {
@@ -133,8 +133,8 @@ private fun JsonPrimitive.toAnyValue(): Any? {
 internal fun JsonElement.toAnyOrNull(): Any? = when (this) {
     is JsonNull -> null
     is JsonPrimitive -> toAnyValue()
-    is JsonObject -> this.map { it.key to it.value.toAnyOrNull() }.toMap()
-    is JsonArray -> this.map { it.toAnyOrNull() }
+    is JsonObject -> map { it.key to it.value.toAnyOrNull() }.toMap()
+    is JsonArray -> map { it.toAnyOrNull() }
 }
 
 internal object AnySerializer : KSerializer<Any?> {
