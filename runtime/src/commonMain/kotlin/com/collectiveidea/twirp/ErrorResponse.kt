@@ -9,11 +9,8 @@ import kotlinx.serialization.Serializable
 public data class ErrorResponse(
     val code: ErrorCode = ErrorCode.Unknown,
     val msg: String,
-    val meta: Map<
-        String,
-        @Serializable(with = AnySerializer::class)
-        Any?,
-    >? = null,
+    @Suppress("ktlint:standard:annotation")
+    val meta: Map<String, @Serializable(with = AnySerializer::class) Any?>? = null,
 )
 
 // See: https://github.com/twitchtv/twirp/blob/main/docs/spec_v7.md#error-codes
