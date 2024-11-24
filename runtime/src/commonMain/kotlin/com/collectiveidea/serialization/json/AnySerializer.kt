@@ -26,10 +26,7 @@ internal object AnySerializer : KSerializer<Any?> {
         encoder.encodeSerializableValue(delegateSerializer, value.toJsonElement())
     }
 
-    override fun deserialize(decoder: Decoder): Any? {
-        val jsonElement = decoder.decodeSerializableValue(delegateSerializer)
-        return jsonElement.toAnyOrNull()
-    }
+    override fun deserialize(decoder: Decoder): Any? = decoder.decodeSerializableValue(delegateSerializer).toAnyOrNull()
 }
 
 //
