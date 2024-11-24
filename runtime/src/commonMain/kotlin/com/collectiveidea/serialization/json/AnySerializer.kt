@@ -46,13 +46,20 @@ internal fun Any?.toJsonElement(): JsonElement = when (this) {
     else -> JsonNull
 }
 
-internal fun Collection<*>.toJsonArray() = JsonArray(map { it.toJsonElement() })
+private fun Collection<*>.toJsonArray() = JsonArray(map { it.toJsonElement() })
 
-internal fun Map<*, *>.toJsonObject() = JsonObject(mapKeys { it.key.toString() }.mapValues { it.value.toJsonElement() })
+private fun Map<*, *>.toJsonObject() = JsonObject(mapKeys { it.key.toString() }.mapValues { it.value.toJsonElement() })
 
 //
 // Deserialize
 //
+
+internal fun JsonElement.toAnyOrNull(): Any? = when (this) {
+    is JsonNull -> null
+    is JsonPrimitive -> toAnyValue()
+    is JsonObject -> map { it.key to it.value.toAnyOrNull() }.toMap()
+    is JsonArray -> map { it.toAnyOrNull() }
+}
 
 private fun JsonPrimitive.toAnyValue(): Any? {
     val content = this.content
@@ -72,11 +79,4 @@ private fun JsonPrimitive.toAnyValue(): Any? {
         ?: content.toLongOrNull()
         ?: content.toDoubleOrNull()
         ?: throw Exception("Cannot convert JSON $content to value")
-}
-
-internal fun JsonElement.toAnyOrNull(): Any? = when (this) {
-    is JsonNull -> null
-    is JsonPrimitive -> toAnyValue()
-    is JsonObject -> map { it.key to it.value.toAnyOrNull() }.toMap()
-    is JsonArray -> map { it.toAnyOrNull() }
 }
