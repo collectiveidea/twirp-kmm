@@ -46,7 +46,9 @@ class ErrorResponseTest {
                     "nestedKey3": 17,
                     "nestedKey4": [9, null]
                 },
-                "key6": null
+                "key6": null,
+                "key7": 12.53,
+                "key8": 4000000000
             }
         }
             """.trimIndent(),
@@ -54,28 +56,28 @@ class ErrorResponseTest {
 
         val meta = error.meta
         assertNotNull(meta)
-        assertEquals("a string", meta["key1"])
-        assertEquals(false, meta["key2"])
-        assertEquals(51, meta["key3"])
-
-        val key4Array = meta["key4"] as ArrayList<*>
-        assertEquals(4, key4Array.size)
-        assertEquals(true, key4Array[0])
-        assertEquals(1, key4Array[1])
-        assertEquals("test", key4Array[2])
-        val key4ArrayNestedMap = key4Array[3] as Map<*, *>
-        assertEquals(1, key4ArrayNestedMap.keys.size)
-        assertEquals("yup", key4ArrayNestedMap["nestedKey0"])
-
-        val key5Map = meta["key5"] as Map<*, *>
-        assertEquals("another string", key5Map["nestedKey1"])
-        assertEquals(true, key5Map["nestedKey2"])
-        assertEquals(17, key5Map["nestedKey3"])
-        val key5NestedArray = key5Map["nestedKey4"] as ArrayList<*>
-        assertEquals(2, key5NestedArray.size)
-        assertEquals(9, key5NestedArray[0])
-        assertEquals(null, key5NestedArray[1])
-
-        assertEquals(null, meta["key6"])
+        assertEquals(
+            mapOf(
+                "key1" to "a string",
+                "key2" to false,
+                "key3" to 51,
+                "key4" to listOf(
+                    true,
+                    1,
+                    "test",
+                    mapOf("nestedKey0" to "yup"),
+                ),
+                "key5" to mapOf(
+                    "nestedKey1" to "another string",
+                    "nestedKey2" to true,
+                    "nestedKey3" to 17,
+                    "nestedKey4" to listOf(9, null),
+                ),
+                "key6" to null,
+                "key7" to 12.53,
+                "key8" to 4000000000,
+            ),
+            meta,
+        )
     }
 }
