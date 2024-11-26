@@ -6,6 +6,8 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 
 ## [Unreleased]
 
+## [1.0.0] - 2024-11-26
+
  * Runtime - Refactor and cleanup `Any?` JSON deserialization. See [#19](https://github.com/collectiveidea/twirp-kmp/pull/19). 
  * Update dependencies. See [#17](https://github.com/collectiveidea/twirp-kmp/pull/17).
     * Bump Kotlin from 2.0.20 to 2.0.21
